@@ -1,0 +1,98 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light" >
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{ path('articles_index') }}"><img src="https://scontent.ftun9-1.fna.fbcdn.net/v/t1.6435-9/123083181_104166591496770_915863500733716311_n.png?_nc_cat=102&ccb=1-5&_nc_sid=e3f864&_nc_ohc=Jo9FloFzepAAX-53lfC&_nc_ht=scontent.ftun9-1.fna&oh=00_AT_txja0vKoMGWFy1f7gqJj3FPy0THrq6NAUckAVyJGMFw&oe=62389532" style="height:50px; width:70px"/></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="{{ path('articles_index') }}" style="font-family:cursive;">InstaHome</a>
+        </li>
+        <li>
+            <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Chercher Nos Biens</a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="navbarDropdown">  
+                <li class="dropdown-item"><a href="{{ path('article_par_city') }}" style="font-family:cursive;" class="btn btn-outline-ligth">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                            Par Régions
+                        </a>
+                </li>          
+                <li class="dropdown-item"><a href="{{ path('article_par_cat') }}" style="font-family:cursive;" class="btn btn-outline-ligth">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                            Par Status(vente/location)
+                        </a></li>
+                <li class="dropdown-item"><a href="{{ path('article_par_prix') }}" style="font-family:cursive;" class="btn btn-outline-ligth">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                            Par Marge de Prix
+                        </a>
+                </li>
+            </ul>
+            </div>   
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('contact') }}" style="font-family:cursive;">Nous Contacter</a>
+        </li>
+        {% if is_granted('ROLE_EDITOR') %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('articles_new') }}" style="font-family:cursive;">Ajouter des Biens</a>
+        </li>
+        {% endif %}
+        </ul>
+      </ul>
+      <ul class="d-flex">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_logout') }}" style="font-family:cursive;">Déconnexion</a>
+            </li>
+            {% else %}
+            
+            <li>
+            <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" style="font-family:cursive;">Connexion</a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="navbarDropdown">  
+                <li class="dropdown-item"><a href="{{ path('app_login') }}" style="font-family:cursive;" class="btn btn-outline-ligth">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                            Se Connecter
+                        </a>
+                </li>          
+                <li class="dropdown-item"><a href="{{ path('app_register') }}" style="font-family:cursive;" class="btn btn-outline-ligth">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                            Créer un compte
+                        </a></li>
+            </ul>
+            </div>   
+        </li>
+        {% endif %}
+            <li>
+            {% if is_granted('ROLE_ADMIN') %}
+            <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="{{ path('admin_index') }}" style="font-family:cursive;">Espace Admin</a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="navbarDropdown">  
+                <li class="dropdown-item"><a href="{{ path('admindash') }}" style="font-family:cursive;" class="btn btn-outline-ligth">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                            Accés au DashBoard
+                        </a>
+                </li>          
+                <li class="dropdown-item"><a href="{{ path('admin_index') }}" style="font-family:cursive;" class="btn btn-outline-ligth">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                            Gérer Utilisateurs
+                        </a></li>
+            </ul>
+            </div>   
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link" href="#" style="font-family:cursive;"></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" style="font-family:cursive;"></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" style="font-family:cursive;"></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

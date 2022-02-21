@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Utilisateurs{% endblock %}
+
+{% block body %}
+    <h1 class="text-center" style="color:#CD5C5C;font-weight:bold; font-family:cursive">Liste des Utilisateurs</h1><i class="d-flex justify-content-center"><hr class="col-md-6" style="color:#800000;font-weight:bold;height:2px;width:94%"></i>
+<div class="container ">
+    <div class="row d-flex justify-content-center" style="margin-top:20px">
+        <div class="col-md-12" >
+            <table id="users" class="table table-bordered table-sm">      
+                <thead>
+                    <tr class="table-info">
+                        <th>Id</th>
+                        <th>email</th>
+                        <th>Telephone</th>
+                        <th>Roles</th>
+                        <th>Articles</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.tel }}</td>
+                        <td>
+                            {% for role in user.roles %}
+                                    {% if role == "ROLE_USER" %}
+                                       <span class="badge rounded-pill bg-info">Utilisateur</span> 
+                                        {% elseif role == "ROLE_EDITOR" %}
+                                        <span class="badge rounded-pill bg-success">Editeur</span>
+                                    {% elseif role == "ROLE_ADMIN" %}
+                                   <span class="badge rounded-pill bg-primary">Administrateur</span> 
+                                    {% endif %}
+                                {% endfor %}
+                        </td>
+                        <td>{{ user.articles| length }}</td>
+                        
+                        <td>
+                        <a href="{{ path('admin_modifier_utilisateur', {'id': user.id}) }}" class="btn btn-secondary">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                            Modifier
+                        </a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">il n'y a pas des utlisateurs inscrits</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

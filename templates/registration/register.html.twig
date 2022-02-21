@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+<style>
+    body{
+        background-image: url("https://cdn.pixabay.com/photo/2016/04/12/22/35/watercolour-1325656__480.jpg");
+        background-size: 100% 700px;
+        
+       
+    }
+    img{
+        height:45px;
+        width:45px;
+    }
+</style>
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    <h1 class="text-center" style="color:#CD5C5C;font-weight:bold; font-family:cursive">créer nouveau compte</h1><i class="d-flex justify-content-center"><hr class="col-md-6" style="color:#800000;font-weight:bold;height:2px;width:80%"></i>
+<div class="container ">
+    <div class="row d-flex justify-content-center" style="margin-top:20px">
+    <div class="col-md-6" >
+    {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.tel) }}
+        {{ form_row(registrationForm.plainPassword, {
+            label: 'Password'
+        }) }}
+        {{ form_row(registrationForm.agreeTerms) }}
+
+        <button type="submit" class="btn btn-success" style="margin-right:15px">S'inscrire</button>
+        <a href="{{ path('app_login') }}" class="btn btn-primary">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+                Se connecter
+            </a>
+    {{ form_end(registrationForm) }}
+</div>
+</div>
+</div>
+{% endblock %}

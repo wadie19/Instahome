@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+{% block title%} Liste des Articles par Status{% endblock %}
+
+{% block body %}
+<style>
+    body{
+        background-image: url("https://lavozdemotul.com/wp-content/uploads/2016/08/registration-page-background-504-1.png");
+        background-size: 100% 700px;
+        
+       
+    }
+     img{
+        height:200px;
+        width:220px;
+    }
+</style>
+
+    <h1 class="text-center" style="color:#CD5C5C;font-weight:bold; font-family:cursive">Rechercher Articles Par Status</h1><i class="d-flex justify-content-center"><hr class="col-md-6" style="color:#800000;font-weight:bold;height:2px;width:94%"></i>
+
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-7" style="margin-top:20px" >
+            {{ form_start(form) }}
+
+            <div >
+            
+            {{ form_row(form.Categories) }}
+            
+                <button type="submit" class="btn btn-success" style="font-family:cursive">Rechercher</button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>    
+</div>
+<div class="container" style="margin-top: 20px">
+    <div class="row">
+        
+        {% for article in articles %}
+            <div class="col-6" style="margin-top: 20px">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <i style="font-family:bold;">{{article.titre}}    </i>
+                    </div>
+                    <div class="card-body">
+                        <img class="justify-content-center col-11 img-fluid rounded" style="filter: drop-shadow(0 0 0.75rem #F5F5DC);height:260px" src="{{asset('/uploads/images/articles/' ~ article.image )}}" alt="image">
+                        
+                        <p><i style="color:blue;">Prix:</i> {{article.prix}} DT</p> 
+                        <p><i style="color:blue;">Status:</i> {{ article.categorie }}  </p>
+                        <p><i style="color:blue;">lieu:</i> {{ article.city }}  </p>
+                        
+                    </div>
+                    <div class="card-footer text-muted">
+                        <p>
+                        {% if is_granted('ROLE_USER') %}
+                        <a href="{{ path('articles_show', {'id': article.id}) }}" style="font-family:cursive;" class="btn btn-primary">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                            Voir plus
+                        </a>
+                        {% endif %}
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('articles_edit', {'id': article.id}) }}" style="font-family:cursive;" class="btn btn-success">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                            Modifier
+                        </a>
+                        {% endif %}
+                        {% if is_granted('ROLE_ADMIN') %}
+                        
+                        <a href="{{path('articles_delete', {'id': article.id})}}" style="font-family:cursive;" class="btn btn-danger" onclick="return confirm('Etes-vous sûr de supprimer cet article?');">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                            Supprimer
+                        </a>
+                        {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>    
+        
+    {% else %}
+    <p style="font-family:cursive;" class="text-center">
+    <img src='https://t3.ftcdn.net/jpg/02/95/34/72/360_F_295347201_ZQfeqTU03fWOUOGq87M3ShBCJx9Vrn9G.jpg'  alt="oop pas d'articles"/><br>
+    Aucun articles disponible pour le moment, merci de nous visiter ultérieurment.</p>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+#Global #left {
+    float:left;
+    width:60%;
+    }
+    #Global #right {
+        margin-left:60%   
+    }
+    img{
+        width: 450px;
+        height:450px;
+    }

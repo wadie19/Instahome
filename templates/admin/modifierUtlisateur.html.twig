@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des utlisateurs{% endblock %}
+
+{% block body %}
+    <h1 class="text-center" style="color:#CD5C5C;font-weight:bold; font-family:cursive">Modifier Cet Utilisateur</h1><i class="d-flex justify-content-center"><hr class="col-md-6" style="color:#800000;font-weight:bold;height:2px;width:94%"></i>
+<div class="container ">
+    <div class="row d-flex justify-content-center" style="margin-top:20px">
+        <div class="col-md-7" >    
+    {{form(userForm)}}
+    
+    </div>
+    </div>
+    </div>
+{% endblock %}

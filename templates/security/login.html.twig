@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+<style>
+    body{
+        background-image: url("https://cdn.pixabay.com/photo/2016/04/12/22/35/watercolour-1325656__480.jpg");
+        background-size: 100% 700px;
+        
+       
+    }
+    img{
+        height:45px;
+        width:45px;
+    }
+</style>
+<form method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            vous êtes connecté en tant que : {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+
+    <h1 class="text-center" style="color:#CD5C5C;font-weight:bold; font-family:cursive">connecter à votre compte</h1><i class="d-flex justify-content-center"><hr class="col-md-6" style="color:#800000;font-weight:bold;height:2px;width:80%"></i>
+<div class="container ">
+    <div class="row d-flex justify-content-center" style="margin-top:20px">
+        <div class="col-md-6" >
+            <label for="inputEmail">Email</label>
+            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+            <label for="inputPassword">Password</label>
+            <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+            <input type="hidden" name="_csrf_token"
+                value="{{ csrf_token('authenticate') }}"
+            >
+
+    {#
+        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+        See https://symfony.com/doc/current/security/remember_me.html
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" name="_remember_me"> Remember me
+            </label>
+        </div>
+    #}
+            <div class="row d-flex justify-content-center">
+            <button class="btn btn-primary col-md-9" style="margin-top:15px;font-weight:bold;font-family:cursive;font-size:18px" type="submit">
+                Se connecter
+            </button></div><hr>
+            <div class="row d-flex justify-content-center">
+            <a href="{{ path('app_register') }}" class="btn btn-success btn btn-primary col-md-6" style="margin-top:10px;font-weight:bold;font-family:cursive;font-size:18px">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+                Créer nouveau compte
+            </a>
+        </div>
+        </div>
+    </div>
+</div>
+</form>
+
+{% endblock %}

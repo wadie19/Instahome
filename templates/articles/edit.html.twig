@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier Cet Article{% endblock %}
+
+{% block body %}
+    <h1 class="text-center" style="color:#CD5C5C;font-weight:bold; font-family:cursive;">Modifier Cet Article</h1><i class="d-flex justify-content-center"><hr class="col-md-6" style="color:#800000;font-weight:bold;height:2px;width:80%"></i>
+
+    {{ include('articles/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+
+    
+{% endblock %}

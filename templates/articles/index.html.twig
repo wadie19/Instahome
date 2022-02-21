@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des MAISONS et TERRAINS{% endblock %}
+
+{% block body %}
+<style>
+    #container{
+        background-image: url("https://news.sextantfrance.fr/wp-content/uploads/2021/11/AdobeStock_49911626-scaled.jpeg");
+        background-size: 100% 700px;
+        height:700px;
+        margin-bottom:2%;
+    }
+    
+</style>
+<div id="container">
+
+<div class="container" >
+
+<div class="row d-flex justify-content-center">
+   <div class="col-md-6" >
+    <h1 class="text-center" style="padding:20px;color:#CD5C5C;font-weight:bold; font-family:cursive">Bienvenue à Instahome Tunisie</h1><i class="d-flex justify-content-center"></i><br><br>
+    </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+    <br>
+    <div class="col-md-7 " style="padding-left:20%">
+    <h1 style="color:#F5DEB3;font-weight:bold; font-family:cursive">Faites vos Recherches</h1><br><br>
+    <h3 style="font-weight:bold; font-family:cursive">Par Régions : 
+            <a href="{{ path('article_par_cat')}}" style="font-family:cursive;">
+                <i class="glyphicon glyphicon-chevron-left"><img src="https://cdn.icon-icons.com/icons2/1527/PNG/512/search_106707.png" style="height:70px;width:70px" /></i>
+                    
+            </a></h3>
+    <h3 style="font-weight:bold; font-family:cursive">Par Vente / Location : 
+            <a href="{{ path('article_par_city') }}" style="font-family:cursive;" >
+                <i class="glyphicon glyphicon-chevron-left"><img src="https://cdn.icon-icons.com/icons2/1527/PNG/512/search_106707.png" style="height:70px;width:70px" /></i>     
+            </a></h3>
+    <h3 style="font-weight:bold; font-family:cursive">Par Prix : 
+            <a href="{{ path('article_par_prix') }}" style="font-family:cursive;" >
+                <i class="glyphicon glyphicon-chevron-left"><img src="https://cdn.icon-icons.com/icons2/1527/PNG/512/search_106707.png" style="height:70px;width:70px" /></i>
+            </a></h3>
+   </div>
+</div>
+</div>
+</div>
+<h1 class="text-center"><i style ="color:#DC143C;font-family:cursive;">Liste des MAISONS et TERRAINS</i></h1><hr>
+<div class="container">
+    <div class="row">
+        
+        {% for article in articles %}
+            <div class="col-4" style="margin-top: 20px;margin-bottom:20px;">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <i style="font-family:bold;">{{article.titre}}    </i>
+                    </div>
+                    <div class="card-body">
+                        <img class="justify-content-center col-11 img-fluid rounded" style="filter: drop-shadow(0 0 0.75rem #F5F5DC);height:260px" src="{{asset('/uploads/images/articles/' ~ article.image )}}" alt="image">
+                        
+                        <p><i style="color:blue;">Prix:</i> {{article.prix}} DT</p> 
+                        <p><i style="color:blue;">Status:</i> {{ article.categorie }}  </p>
+                        <p><i style="color:blue;">lieu:</i> {{ article.city }}  </p>
+                        
+                    </div>
+                    <div class="card-footer text-muted">
+                        <p>
+                        {% if is_granted('ROLE_USER') %}
+                        <a href="{{ path('articles_show', {'id': article.id}) }}" style="font-family:cursive;" class="btn btn-primary">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                            Voir plus
+                        </a>
+                        {% endif %}
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('articles_edit', {'id': article.id}) }}" style="font-family:cursive;" class="btn btn-success">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                            Modifier
+                        </a>
+                        {% endif %}
+                        {% if is_granted('ROLE_ADMIN') %}
+                        
+                        <a href="{{path('articles_delete', {'id': article.id})}}" style="font-family:cursive;" class="btn btn-danger" onclick="return confirm('Etes-vous sûr de supprimer cet article?');">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                            Supprimer
+                        </a>
+                        {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>    
+        
+    {% else %}
+    <p style="font-family:cursive;">Aucun articles disponible pour le moment, merci de nous visiter ultérieurment.</p>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

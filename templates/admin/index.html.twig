@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin {% endblock %}
+
+{% block body %}
+<style>
+    body{
+        background-image: url("https://wallpaperaccess.com/full/16677.jpg");
+    }
+    img{
+        height:45px;
+        width:45px;
+    }
+</style>
+<div>
+<nav class="navbar navbar-expand navbar-light bg-dark">
+  <a class="navbar-brand" style="color:white"  href=""><img src='https://e7.pngegg.com/pngimages/1011/702/png-clipart-computer-icons-graphics-iconfinder-administrator-icon-monochrome-black.png'/></a>
+  <button class="navbar-toggler" type="button"  data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" style="color:white" href="">Accueil</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" style="color:white" href="{{ path('admindash') }}">Dashboard</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container " >
+<br>
+    <div class="d-flex flex-column align-items-end bg-light my-2 rounded" style="margin-left:20%;padding:15px">
+        <div class="d-flex align-items-start bg-light my-2 " style="min-height:5rem;float: right;">
+            <i>bienvenue chez dashboard admin ici tu peux gerer vos utlisateur en lui donnant ou en modifiant leur roles pour leurs 
+            rendre plus active selon leur interactions avec notre site web.
+
+             Pour acces a la Dashboard merci de cliquer sur le bouton ci-dessous<br>
+             <a href="{{ path('admindash') }}"   style="margin-top:10px;font-weight:bold;font-family:cursive;font-size:18px">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+                Accés au Dashboard
+            </a>
+            </i>   
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="d-flex flex-column align-items-end bg-light my-2 rounded" style="margin:15%;padding:15px">
+        <div class="d-flex flex-column align-items-center bg-light my-2">
+              <i>Vous pouvez gérer les utlisateurs inscrits en cliquant sur le bouton ci-dessous qui va vous rediriger vers la liste des utlisateurs
+              où vous pouvez faire la gestion des ces utlisateurs.
+              Sinon vous pouvez rediriger vers le Dashboard principale où vous pouvez gérer tout le site web <strong style='color: #FF6347'>INSTAHOME Admin</strong>
+              <br><br>
+              <a href="{{ path('admin_utilisateurs') }}" style="font-family:cursive;" class="btn btn-primary">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                            Liste des Utilisateurs
+                        </a>
+              </i>
+        </div>
+    </div>
+</div>
+{% endblock %}
